@@ -1,0 +1,30 @@
+---
+- name: Install LAMP
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apache2
+    - php5
+    - mysql-server
+  become: yes
+
+- name: Delete /var/www/html/index.html
+  file:
+    path: /var/www/html/index.html
+    state: absent
+  become: yes
+
+# - name: Download wordpress and extract file
+#   unarchive:
+#     src: https://wordpress.org/latest.tar.gz
+#     dest: /var/www/html/
+#     copy: no
+#   become: yes
+
+- name: Change root document on Apache
+  lineinfile:
+    dest: /etc/apache2/sites-available/000-default.conf
+    regexp: DocumentRoot .*
+    line: '        DocumentRoot /var/www/html/wordpress'
+  become: yes
