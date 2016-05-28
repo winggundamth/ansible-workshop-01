@@ -1,4 +1,15 @@
 ---
+- name: Set MySQL root password before installing
+  debconf:
+    name: mysql-server
+    question: "{{ item }}"
+    value: "{{ wordpress_mysql_root_pass | quote }}"
+    vtype: password
+  with_items:
+    - mysql-server/root_password
+    - mysql-server/root_password_again
+  become: yes
+
 - name: Install LAMP
   apt:
     name: "{{ item }}"

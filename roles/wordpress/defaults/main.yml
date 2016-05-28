@@ -9,3 +9,4 @@ wordpress_packages:
   - php5
   - php5-mysql
   - mysql-server
+wordpress_mysql_root_pass: mysqlpass
