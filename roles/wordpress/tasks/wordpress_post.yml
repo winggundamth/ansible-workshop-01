@@ -5,3 +5,10 @@
     regexp: DocumentRoot .*
     line: "        DocumentRoot {{ wordpress_root_path }}"
   notify: Restart Apache
+
+- name: Create wordpress database
+  mysql_db:
+    name: wordpress
+    state: present
+    login_user: root
+    login_password: "{{ wordpress_mysql_root_pass }}"
