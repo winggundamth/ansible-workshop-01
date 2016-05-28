@@ -4,5 +4,4 @@
     dest: "{{ wordpress_apache_default_config_file }}"
     regexp: DocumentRoot .*
     line: "        DocumentRoot {{ wordpress_root_path }}"
-  become: yes
   notify: Restart Apache

@@ -8,20 +8,17 @@
   with_items:
     - mysql-server/root_password
     - mysql-server/root_password_again
-  become: yes
 
 - name: Install LAMP
   apt:
     name: "{{ item }}"
     state: present
   with_items: "{{ wordpress_packages }}"
-  become: yes
 
 - name: "Delete {{ wordpress_document_root_index }}"
   file:
     path: "{{ wordpress_document_root_index }}"
     state: absent
-  become: yes
 
 - name: Check if wordpress is installed
   stat:

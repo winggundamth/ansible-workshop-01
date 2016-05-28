@@ -5,4 +5,3 @@
     dest: "{{ wordpress_document_root }}"
     copy: no
   when: not check_wordpress.stat.exists
-  become: yes
