@@ -2,6 +2,7 @@
 wordpress_document_root: /var/www/html
 wordpress_root_path: "{{ wordpress_document_root }}/wordpress"
 wordpress_document_root_index: "{{ wordpress_document_root }}/index.html"
+wordpress_config_path: "{{ wordpress_root_path }}/wp-config.php"
 wordpress_download_url: https://wordpress.org/latest.tar.gz
 wordpress_apache_default_config_file: /etc/apache2/sites-available/000-default.conf
 wordpress_packages:
@@ -13,3 +14,14 @@ wordpress_packages:
 wordpress_mysql_root_user: root
 wordpress_mysql_root_pass: mysqlpass
 wordpress_database_name: wordpress
+wordpress_mysql_hostname: localhost
+wordpress_table_prefix: wp_
+
+wordpress_auth_key: bz%![!#=T2w&-EM]NqS3Z1(xPEl/UXe3B!sa1KsV(F&T0a!5.0T;|U15fJurBwIn
+wordpress_secure_auth_key: 5ebH bi[K&&p>Lbu!d15?*Nk)t3?zMYbX=;Q]G)RDfwH5qoP&P~ls/aMkA@eI/eN-
+wordpress_logged_in_key: qHH?;G-HjA=^TfR`Q$G&Z)(41WV#Ffnyi]9N{oTaNaY}Q@l0:o2B avCLWxE>:n4
+wordpress_nonce_key: QYq+O>~Ndw6E0{O>1k7OA|B,f$vB%vk1BJxS3&Jk6{2FB&y$3FSUc]H2d[Zf!:ak
+wordpress_auth_salt: abj`M[<Rr{964^D+byD6o=!RsXA?/S_/bLAWF&%i0^*U4al{[SN [>THL`RO7:g.
+wordpress_secure_auth_salt: D9ufeJdJv2&ZX}I -HKc@<Y,;W^Qi/HUM).2^b5RXwKMlbhwy1Mn3AL.C2E*U[xt
+wordpress_logged_in_salt: Z#a sb>VIuo8BG}cX*L*gf+Yj-8!5Vl^AP9#bz5GkjfSPjy,,-Z^bt$IKhhz;CEJ
+wordpress_nonce_salt: O;5AW+ndCCE#6zxBQA|WI)nyO0.1ldF2/lS_s8oFDaZ{*E_U`@)-CW9VbBsvMK}0

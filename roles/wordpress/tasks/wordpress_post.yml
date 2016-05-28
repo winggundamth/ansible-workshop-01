@@ -13,7 +13,13 @@
     login_user: "{{ wordpress_mysql_root_user }}"
     login_password: "{{ wordpress_mysql_root_pass }}"
 
+- name: Check if wp-config.php exists
+  stat:
+    path: "{{ wordpress_config_path }}"
+  register: check_wordpress_config
+
 - name: Copy wp-config.php template
   template:
     src: wp-config.php.j2
-    dest: "{{ wordpress_root_path }}/wp-config.php"
+    dest: "{{ wordpress_config_path }}"
+  when: not check_wordpress_config.stat.exists
