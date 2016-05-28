@@ -1,0 +1,8 @@
+---
+- name: Download wordpress and extract file
+  unarchive:
+    src: "{{ wordpress_download_url }}"
+    dest: "{{ wordpress_document_root }}"
+    copy: no
+  when: not check_wordpress.stat.exists
+  become: yes

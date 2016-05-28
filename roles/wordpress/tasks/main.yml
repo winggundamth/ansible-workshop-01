@@ -1,34 +1,4 @@
 ---
-- name: Install LAMP
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ wordpress_packages }}"
-  become: yes
-
-- name: "Delete {{ wordpress_document_root_index }}"
-  file:
-    path: "{{ wordpress_document_root_index }}"
-    state: absent
-  become: yes
-
-- name: Check if wordpress is installed
-  stat:
-    path: "{{ wordpress_root_path }}"
-  register: check_wordpress
-
-- name: Download wordpress and extract file
-  unarchive:
-    src: "{{ wordpress_download_url }}"
-    dest: "{{ wordpress_document_root }}"
-    copy: no
-  when: not check_wordpress.stat.exists
-  become: yes
-
-- name: Change root document on Apache
-  lineinfile:
-    dest: "{{ wordpress_apache_default_config_file }}"
-    regexp: DocumentRoot .*
-    line: "        DocumentRoot {{ wordpress_root_path }}"
-  become: yes
-  notify: Restart Apache
+- include: wordpress_pre.yml
+- include: wordpress_install.yml
+- include: wordpress_post.yml

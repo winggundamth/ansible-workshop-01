@@ -1,7 +1,7 @@
 ---
 wordpress_document_root: /var/www/html
 wordpress_root_path: "{{ wordpress_document_root }}/wordpress"
-wordpress_document_root_index: {{ wordpress_document_root }}/index.html
+wordpress_document_root_index: "{{ wordpress_document_root }}/index.html"
 wordpress_download_url: https://wordpress.org/latest.tar.gz
 wordpress_apache_default_config_file: /etc/apache2/sites-available/000-default.conf
 wordpress_packages:
