@@ -3,36 +3,32 @@
   apt:
     name: "{{ item }}"
     state: present
-  with_items:
-    - apache2
-    - php5
-    - php5-mysql
-    - mysql-server
+  with_items: "{{ wordpress_packages }}"
   become: yes
 
-- name: Delete /var/www/html/index.html
+- name: "Delete {{ wordpress_document_root_index }}"
   file:
-    path: /var/www/html/index.html
+    path: "{{ wordpress_document_root_index }}"
     state: absent
   become: yes
 
 - name: Check if wordpress is installed
   stat:
-    path: /var/www/html/wordpress
+    path: "{{ wordpress_root_path }}"
   register: check_wordpress
 
 - name: Download wordpress and extract file
   unarchive:
-    src: https://wordpress.org/latest.tar.gz
-    dest: /var/www/html/
+    src: "{{ wordpress_download_url }}"
+    dest: "{{ wordpress_document_root }}"
     copy: no
   when: not check_wordpress.stat.exists
   become: yes
 
 - name: Change root document on Apache
   lineinfile:
-    dest: /etc/apache2/sites-available/000-default.conf
+    dest: "{{ wordpress_apache_default_config_file }}"
     regexp: DocumentRoot .*
-    line: '        DocumentRoot /var/www/html/wordpress'
+    line: "        DocumentRoot {{ wordpress_root_path }}"
   become: yes
   notify: Restart Apache
