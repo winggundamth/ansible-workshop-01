@@ -6,6 +6,7 @@
   with_items:
     - apache2
     - php5
+    - php5-mysql
     - mysql-server
   become: yes
 
@@ -15,12 +16,18 @@
     state: absent
   become: yes
 
-# - name: Download wordpress and extract file
-#   unarchive:
-#     src: https://wordpress.org/latest.tar.gz
-#     dest: /var/www/html/
-#     copy: no
-#   become: yes
+- name: Check if wordpress is installed
+  stat:
+    path: /var/www/html/wordpress
+  register: check_wordpress
+
+- name: Download wordpress and extract file
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /var/www/html/
+    copy: no
+  when: not check_wordpress.stat.exists
+  become: yes
 
 - name: Change root document on Apache
   lineinfile:
