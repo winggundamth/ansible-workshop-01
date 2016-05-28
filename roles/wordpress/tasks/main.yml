@@ -28,3 +28,9 @@
     regexp: DocumentRoot .*
     line: '        DocumentRoot /var/www/html/wordpress'
   become: yes
+
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted
+  become: yes
